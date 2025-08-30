@@ -6,7 +6,7 @@ const connectdb = () => {
     .then(() => {
       console.log("database is connect");
     })
-    .catch(() => {
+    .catch((error) => {
       console.log("error in database", error);
     });
 };

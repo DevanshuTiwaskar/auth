@@ -87,6 +87,10 @@ const loginUser = async (req, res) => {
     })
     .select("+password"); ///why we use select method because in userModel we use select:false
 
+
+// console.log("Generated token for:", user.email, "Role:", user.role);
+
+
   if (!user) {
     return res.status(400).json({ message: "User not found" });
   }

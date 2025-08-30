@@ -3,9 +3,9 @@ var ImageKit = require("imagekit");
 const utils = require('../utils/utils')
 
 var imagekit = new ImageKit({
-    publicKey : "public_f54V6RHi5HlkThZrRXS3d79jfTE=",
-    privateKey : "private_/WMQ7rOF3GeNrg9Xkqq2wtNinOE=",
-    urlEndpoint : "https://ik.imagekit.io/obavnjjrn"
+    publicKey : process.env.PUBLIC_KEY,
+    privateKey : process.env.PRIVATE_KEY,
+    urlEndpoint : process.env.URL_ENDPONIT
 });
 
 
@@ -18,7 +18,7 @@ async  function uploadFile(file){
         folder: "products_Images"
     })
 
-
+   return result
 
 }
 

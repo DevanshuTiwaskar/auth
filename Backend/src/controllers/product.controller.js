@@ -11,32 +11,30 @@ const seller = req.seller;
 
 const { title, description, stock} = req.body
 
-
-const file = await Promise.all(req.file.map(async (file)=>{
-   
-   return await storageService.uploadFile(file.buffer)
-}))
-
+const files = await Promise.all(
+  req.files.map(async (file) => {
+    return await storageService.uploadFile(file.buffer);
+  })
+);
+console.log(files)
 const product = await productModel.create({
-    title:title,
-    decription: description,
-    price:{
-        amount: price?.amount,
-        currency: price?.amount || "INR"
-    },
-    image: file.map(i => i.url),
-    seller: seller._id,
-    stock: parseInt(stock)
-})
+  title,
+  description,
+  price: {
+    amount: price?.amount,
+    currency: price?.currency || "INR"
+  },
+  image: files.map(i => i.url),
+  seller: seller._id,
+  stock: parseInt(stock) || 0
+});
+
 
 
 res.status(201).json({
     message: "product create successfully",
     product
 })
-
-
-
 
 
 }
@@ -48,7 +46,7 @@ const getAllProduct = async(req,res) => {
         seller: seller._id
     })
 
-    req.status(200).json({
+    res.status(200).json({
         message: "seller product fetched successfully",
         product
     })
